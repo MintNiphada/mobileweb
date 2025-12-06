@@ -11,17 +11,17 @@
 <body>
   <header>
     <div class="branding container">
-      <!-- Canvas logo -->
-      <canvas id="logo" width="480" height="240" aria-label="KKU animated logo"></canvas>
+      <canvas id="logo" width="240" height="120" aria-label="KKU animated logo"></canvas>
+
       <div>
         <h1>KKU Campus Guide</h1>
-        <div class="meta">รหัสประจำตัวนักศึกษา: <strong>[กรอกหมายเลขนักศึกษา]</strong> &nbsp;|&nbsp; ชื่อ-สกุล: <strong>Nipha Da Yanayan</strong></div>
+        <div class="meta">รหัสประจำตัวนักศึกษา: 663380507-9 &nbsp;|&nbsp; ชื่อ-สกุล: นางสาวนิภาดา ญายะนันท์</div>
       </div>
     </div>
     <nav class="container">
-      <a href="#places">สถานที่</a>
-      <a href="#form">แนะนำสถานที่</a>
-      <a href="#about">เกี่ยวกับผลงาน</a>
+      <a href="#places">สถานที่แนะนำ</a>
+      <a href="#form">แนะนำสถานที่ใหม่</a>
+      <a href="#about">เกี่ยวกับเว็บไซต์</a>
     </nav>
   </header>
 
@@ -37,32 +37,31 @@
       </div>
 
       <div class="grid">
-        <!-- Place 1 -->
         <article class="card" aria-labelledby="place1">
           <header>
-            <h2 id="place1">หอสมุดกลาง มหาวิทยาลัยขอนแก่น</h2>
+            <h2 id="place1">สำนักหอสมุด มหาวิทยาลัยขอนแก่น</h2>
           </header>
           <p>หอสมุดกลางเป็นแหล่งเรียนรู้ที่มีหนังสือ และทรัพยากรการเรียนรู้หลากหลาย เหมาะสำหรับการหาข้อมูล ศึกษา และทำงานกลุ่ม บรรยากาศเงียบสงบ พร้อมบริการอินเทอร์เน็ตภายในอาคาร</p>
           <div class="images">
             <img src="css/image/library.jpg" alt="KKU library">
             <img src="css/image/library2.jpg" alt="KKU library">
           </div>
+          <a href="https://maps.app.goo.gl/qaKK1s4UtMTUZBgw5">คลิกเพื่อค้นหาเส้นทาง</a>
         </article>
 
-        <!-- Place 2 -->
         <article class="card" aria-labelledby="place2">
           <header>
             <h2 id="place2">อุทยานเทคโนโลยีการเกษตร มหาวิทยาลัยขอนแก่น</h2>
           </header>
-          <p>โรงพยาบาลของมหาวิทยาลัยให้บริการรักษาพยาบาลทั้งผู้ป่วยในและผู้ป่วยนอก เป็นศูนย์การแพทย์ที่ทันสมัย พร้อมบุคลากรทางการแพทย์และอุปกรณ์ครอบคลุมหลายสาขา</p>
+          <p>อุทยานเทคโนโลยีการเกษตร มหาวิทยาลัยขอนแก่น เป็นสถานที่สำหรับพักผ่อนจิตใจอย่าแท้จริง</p>
           <div class="images">
             <img src="css/image/ag1.jpg" alt="AG">
             <img src="css/image/ag2.jpg" alt="AG">
             <img src="css/image/ag3.jpg" alt="AG">
           </div>
+          <a href="https://maps.app.goo.gl/htxiqG3W6Saw2F6J6">คลิกเพื่อค้นหาเส้นทาง</a>
         </article>
 
-        <!-- Place 3 -->
         <article class="card" aria-labelledby="place3">
           <header>
             <h2 id="place3">ศูนย์ประชุมอเนกประสงค์กาญจนาภิเษก มหาวิทยาลัยขอนแก่น</h2>
@@ -71,9 +70,9 @@
           <div class="images">
             <img src="css/image/Golden.jpg" alt="Golden Jubilee Convention Hall, Khon Kaen University">
           </div>
+          <a href="https://maps.app.goo.gl/97WKEQ7vLcNPXRFeA">คลิกเพื่อค้นหาเส้นทาง</a>
         </article>
 
-        <!-- Place 4 -->
         <article class="card" aria-labelledby="place4">
           <header>
             <h2 id="place4">บึงศรีฐาน มหาวิทยาลัย</h2>
@@ -83,18 +82,16 @@
             <img src="css/image/sithan.jpg" alt="Golden Jubilee Convention Hall, Khon Kaen University">
             <img src="css/image/sithan2.jpg" alt="Golden Jubilee Convention Hall, Khon Kaen University">
           </div>
+          <a href="https://maps.app.goo.gl/btVnA7ouCjz2S89d8">คลิกเพื่อค้นหาเส้นทาง</a>
         </article>
       </div>
     </section>
 
     <section id="form" class="card" style="margin-top:20px;">
       <h2>แบบฟอร์มแนะนำสถานที่</h2>
-      <p class="meta">ผู้ชมสามารถกรอกข้อมูลสถานที่ใหม่ได้ (ชื่อสถานที่, รายละเอียด, URL ของภาพ) — ฟอร์มนี้ตั้งค่าให้ส่งไปยัง Web3Forms โดยใช้ API ของพวกเขา</p>
-
-      <!-- NOTE: สมัครรับ access_key จาก https://web3forms.com/ แล้วใส่ค่าใน input name="access_key" -->
+      <p class="meta">ผู้ชมสามารถกรอกข้อมูลแนะนำสถานที่ใหม่ได้ (ชื่อสถานที่, รายละเอียด, URL ของภาพ)</p>
       <form action="https://api.web3forms.com/submit" method="POST" target="_blank">
-        <!-- ใส่ access_key ที่ได้รับจากบริการ -->
-        <input type="hidden" name="access_key" value="[ใส่_access_key_ที่ได้รับจาก_web3forms]" />
+        <input type="hidden" name="access_key" value="f8387bcc-2234-4d21-9cf9-fd69391a427d"/>
         <input type="hidden" name="subject" value="New KKU Place Submission" />
 
         <label for="placeName">ชื่อสถานที่ (Place Name)</label>
@@ -115,7 +112,6 @@
         <button class="btn" type="submit">ส่งข้อมูล</button>
       </form>
 
-      <p class="meta" style="margin-top:10px;">หมายเหตุ: สมัครใช้งานที่ <a href="https://web3forms.com/" target="_blank">https://web3forms.com/</a> เพื่อรับค่า access_key แล้วแทนที่ช่องด้านบน (access_key) เพื่อให้ฟอร์มทำงานจริง</p>
     </section>
 
     <section id="about" class="card" style="margin-top:20px;">
@@ -189,7 +185,7 @@
         // small subtitle
         ctx.font = '10px sans-serif';
         ctx.fillStyle = 'rgba(8,20,40,0.6)';
-        ctx.fillText('Campus Guide', 0, 22);
+        ctx.fillText('Campus Guide', 0, 15);
         ctx.restore();
 
         // particles
