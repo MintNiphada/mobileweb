@@ -3,7 +3,7 @@
     :root{
       --bg:#f6f8fb;
       --card:#ffffff;
-      --accent:#7C86FF;
+      --accent:#a38daf;
       --muted:#6a6a6a;
       --shadow: 0 6px 18px rgba(12,20,40,0.08);
       --max-width:1100px;
@@ -11,18 +11,17 @@
     }
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,var(--bg),#FEFCE8 100%);
+      font-family: 'Prompt', sans-serif;
+background: linear-gradient(180deg, #ffffff, #eef5ff);
       color:#111827;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
 header{
-  height:70px;           
+  min-height:70px;           
   padding:0 12px;       
   display:flex;
   align-items:center;
-  justify-content:space-between;
   gap:12px;
   box-shadow: var(--shadow);
   background: linear-gradient(90deg, #DBEAFE, #FCE7F3);
@@ -55,8 +54,8 @@ canvas#logo{
 .images{
   display:flex;
   gap:10px;
-  max-height:520px;    /* ความสูงกรอบ */
-  overflow-y:auto;    /* เลื่อนขึ้น-ลงได้ */
+  max-height:520px;   
+  overflow-y:auto;    
 }
 .images img{ 
   width:100%; 
@@ -91,3 +90,73 @@ canvas#logo{
       .images img{ height:100px; }
       h1{ font-size:16px; }
     }
+    
+.map-btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 14px;
+  background:#DBEAFE;
+  color: #374151;
+  text-decoration:none;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:500;
+  transition:0.2s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.map-btn:hover{
+  background:#FCE7F3;
+  transform:translateY(-2px);
+}
+
+nav{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+}
+@media (max-width: 768px){
+  nav a{
+    font-size: 13px;
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 768px){
+  header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px;
+  }
+
+  nav{
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  nav a{
+    font-size: 12px;
+    margin-left: 0;
+    padding: 4px 6px;
+    white-space: nowrap;
+  }
+
+  canvas#logo{
+    height: 45px;
+  }
+}
+nav{
+  margin-left: auto;  
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.nav-logo{
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
