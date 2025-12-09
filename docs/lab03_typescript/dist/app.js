@@ -34,6 +34,12 @@ document.getElementById("addBtn").onclick = () => {
     manager.addStudent(student);
     renderTable();
 };
+document.getElementById("searchNameBtn").onclick = () => {
+    const keyword = document.getElementById("searchName").value;
+    const results = manager.findStudentsByName(keyword);
+    showList(results);
+    alert(`พบทั้งหมด: ${results.length} คน`);
+};
 document.getElementById("searchTitleNameBtn").onclick = () => {
     const keyword = document.getElementById("searchTitleName").value;
     const results = manager.findStudentsByTitleName(keyword);

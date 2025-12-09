@@ -42,6 +42,12 @@ function renderTable(elementId: string = "studentTableBody"): void {
   renderTable();
 };
 
+(document.getElementById("searchNameBtn") as HTMLButtonElement).onclick = () => {
+  const keyword = (document.getElementById("searchName") as HTMLInputElement).value;
+  const results = manager.findStudentsByName(keyword);
+  showList<Student>(results);
+  alert(`พบทั้งหมด: ${results.length} คน`);
+};
 
 (document.getElementById("searchTitleNameBtn") as HTMLButtonElement).onclick = () => {
   const keyword = (document.getElementById("searchTitleName") as HTMLInputElement).value;

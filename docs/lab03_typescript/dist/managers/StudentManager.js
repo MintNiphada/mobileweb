@@ -27,6 +27,11 @@ export class StudentManager {
     findStudentsByEmail(email) {
         return this.students.filter(s => s.email.toLowerCase().includes(email.toLowerCase()));
     }
+    findStudentsByName(keyword) {
+        const lower = keyword.toLowerCase();
+        return this.students.filter(s => s.first_name.toLowerCase().includes(lower) ||
+            s.last_name.toLowerCase().includes(lower));
+    }
     saveToLocalStorage() {
         localStorage.setItem("students", JSON.stringify(this.students));
     }

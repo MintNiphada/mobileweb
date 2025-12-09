@@ -51,7 +51,14 @@ export class StudentManager {
     );
   }
 
-
+  findStudentsByName(keyword: string): Student[] {
+    const lower = keyword.toLowerCase();
+    return this.students.filter(s =>
+      s.first_name.toLowerCase().includes(lower) ||
+      s.last_name.toLowerCase().includes(lower)
+    );
+  }
+  
   saveToLocalStorage(): void {
     localStorage.setItem("students", JSON.stringify(this.students));
   }
