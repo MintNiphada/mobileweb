@@ -22,12 +22,40 @@
             id="id"
             type="text"
             class="form-control"
-            placeholder="Student ID"
+            placeholder="รหัสนักศึกษา"
           />
         </div>
         <div class="col-md-2">
- เพิ่ม title_name,first_name,last_name, email ให้ครบ
-          <input />
+          <input 
+            id="title_name"
+            type="text"
+            class="form-control"
+            placeholder="คำนำหน้า"
+            />
+        </div>
+        <div class="col-md-2">
+          <input 
+            id="first_name"
+            type="text"
+            class="form-control"
+            placeholder="ชื่อ"
+            />
+        </div>
+        <div class="col-md-2">
+          <input 
+            id="last_name"
+            type="text"
+            class="form-control"
+            placeholder="นามสกุล"
+            />
+        </div>
+        <div class="col-md-2">
+          <input 
+            id="email"
+            type="text"
+            class="form-control"
+            placeholder="อีเมล"
+            />
         </div>
         <div class="col-md-2">
           <input
@@ -51,8 +79,7 @@
       </div>
     </div>
 
-
-    <div class="card p-3 mb-4">
+    <!-- <div class="card p-3 mb-4">
       <h5>🔍 ค้นหาด้วยชื่อ</h5>
       <div class="input-group">
         <input
@@ -63,7 +90,7 @@
         />
         <button id="searchNameBtn" class="btn btn-success">ค้นหา</button>
       </div>
-    </div>
+    </div> -->
     <div class="card p-3 mb-4">
       <h5>🔍 ค้นหาด้วยสาขาวิชา</h5>
       <div class="input-group">
@@ -77,6 +104,50 @@
       </div>
     </div>
 
+    <div class="card p-3 mb-4">
+      <h5>🔍 ค้นหาตามข้อมูลนักศึกษา</h5>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <input 
+          id="searchTitleName" 
+          type="text" 
+          class="form-control" 
+          placeholder="ป้อนคำนำหน้าที่ต้องการค้นหา"
+          />
+          <button id="searchTitleNameBtn" class="btn btn-secondary mt-2 w-100">ค้นหา</button>
+        </div>
+
+        <div class="col-md-3">
+          <input 
+          id="searchFirstName" 
+          type="text" 
+          class="form-control" 
+          placeholder="ป้อนชื่อที่ต้องการค้นหา"
+          />
+          <button id="searchFirstNameBtn" class="btn btn-info mt-2 w-100">ค้นหา</button>
+        </div>
+
+        <div class="col-md-3">
+          <input 
+          id="searchLastName" 
+          type="text" 
+          class="form-control" 
+          placeholder="ป้อนนามสกุลที่ต้องการค้นหา"
+          />
+          <button id="searchLastNameBtn" class="btn btn-warning mt-2 w-100">ค้นหา</button>
+        </div>
+
+        <div class="col-md-3">
+          <input 
+          id="searchEmail" 
+          type="text" 
+          class="form-control" 
+          placeholder="ป้อนอีเมลที่ต้องการค้นหา"
+          />
+          <button id="searchEmailBtn" class="btn btn-success mt-2 w-100">ค้นหา</button>
+        </div>
+      </div>
+    </div>
 
     <table class="table table-bordered table-striped">
       <thead>
