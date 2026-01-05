@@ -3,6 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>Photo Gallery</ion-title>
+        <ion-h1>โดย นิภาดา ญายะนันท์ รหัสนักศึกษา 663380507-9</ion-h1>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -12,8 +13,18 @@
         </ion-toolbar>
       </ion-header>
 
+      <!-- CHANGE: Add a grid component to display the photos -->
+      <ion-grid>
+        <ion-row>
+          <!-- CHANGE: Create a new column and image component for each photo -->
+          <ion-col size="6" :key="photo.filepath" v-for="photo in photos">
+            <ion-img :src="photo.webviewPath"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <!-- CHANGE: Add a click event listener to the floating action button. -->
+        <!-- CHANGE: Add a click event listener to the floating action button -->
         <ion-fab-button @click="addNewToGallery()">
           <ion-icon :icon="camera"></ion-icon>
         </ion-fab-button>
@@ -23,12 +34,24 @@
 </template>
 
 <script setup lang="ts">
-import { camera } from 'ionicons/icons';
-import { IonPage, IonHeader, IonFab, IonFabButton, IonIcon, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { camera, trash, close } from 'ionicons/icons';
+import {
+  IonPage,
+  IonHeader,
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonImg,
+} from '@ionic/vue';
 
-// CHANGE: Add `usePhotoGallery` import
 import { usePhotoGallery } from '@/composables/usePhotoGallery';
 
-// CHANGE: Destructure `addNewToGallery` from `usePhotoGallery()
-const { addNewToGallery } = usePhotoGallery();
+// CHANGE: Add `photos` array to destructure from `usePhotoGallery()`
+const { photos, addNewToGallery } = usePhotoGallery();
 </script>
