@@ -1,3 +1,4 @@
+import './Tab2.css'
 <template>
   <ion-page>
     <ion-header>
