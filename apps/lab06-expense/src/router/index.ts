@@ -26,9 +26,15 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'tab3',
         component: () => import('@/views/Tab3Page.vue')
+      },
+      {
+        path: '/tabs/edit/:id',
+        component: () => import('@/views/EditExpense.vue')
       }
     ]
   }
+  
+
 ]
 
 const router = createRouter({

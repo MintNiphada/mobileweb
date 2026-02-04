@@ -1,8 +1,40 @@
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e9f3ff, #ffedf7);
-  background-attachment: fixed;
-  font-family: "Prompt", sans-serif;
+.my-header {
+  --background: #fbd504;
+  --color: #111;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+ion-title {
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+ion-input,
+ion-select,
+ion-textarea {
+  --padding-start: 8px;
+  font-size: 0.95rem;
+}
+
+.my-btn {
+  --background: #000000;
+  --color: #fff;
+  --border-radius: 12px;
+  height: 44px;
+  font-weight: 500;
+}
+
+.my-btn:disabled {
+  opacity: 0.6;
 }

@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar class="my-header">
         <ion-title>สรุปยอดรายรับ-รายจ่าย</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -10,14 +10,16 @@
       <ion-card class="balance-card">
         <ion-card-header>
           <ion-card-subtitle>ยอดเงินคงเหลือ</ion-card-subtitle>
-          <ion-card-title class="balance-amount">{{ formatNumber(totalBalance) }} บาท</ion-card-title>
+          <ion-card-title class="balance-amount">
+            {{ formatNumber(totalBalance) }} บาท
+          </ion-card-title>
         </ion-card-header>
       </ion-card>
 
       <ion-grid>
         <ion-row>
           <ion-col size="6">
-            <ion-card color="success" class="summary-card">
+            <ion-card class="summary-card income">
               <ion-card-header>
                 <ion-card-subtitle>รายรับ</ion-card-subtitle>
                 <ion-card-title>+{{ formatNumber(totalIncome) }}</ion-card-title>
@@ -25,7 +27,7 @@
             </ion-card>
           </ion-col>
           <ion-col size="6">
-            <ion-card color="danger" class="summary-card">
+            <ion-card class="summary-card expense">
               <ion-card-header>
                 <ion-card-subtitle>รายจ่าย</ion-card-subtitle>
                 <ion-card-title>-{{ formatNumber(totalExpense) }}</ion-card-title>
@@ -40,7 +42,12 @@
       </ion-list-header>
 
       <ion-list>
-        <ion-item v-for="item in transactions" :key="item.id">
+        <ion-item
+          v-for="item in transactions"
+          :key="item.id"
+          button
+          @click="goEdit(item.id)"
+        >
           <ion-label>
             <h2>{{ item.title }}</h2>
             <p>{{ item.category }}</p>
@@ -49,7 +56,7 @@
             {{ item.type === 'income' ? '+' : '-' }}{{ formatNumber(item.amount) }}
           </ion-note>
         </ion-item>
-        
+
         <ion-item v-if="transactions.length === 0" lines="none">
           <ion-label class="ion-text-center">ยังไม่มีข้อมูล</ion-label>
         </ion-item>
@@ -59,67 +66,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { 
-  IonPage, IonHeader, IonToolbar, IonTitle, IonContent, 
+import './Tab1.css'
+import { ref, onMounted, computed } from 'vue'
+import {
+  IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
   IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonGrid, IonRow, IonCol, IonList, IonItem, IonLabel, IonNote, IonListHeader
-} from '@ionic/vue';
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '@/firebase';
+} from '@ionic/vue'
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
+import { db } from '@/firebase'
+import { useRouter } from 'vue-router'
 
-const transactions = ref<any[]>([]);
+const router = useRouter()
+
+const goEdit = (id: string) => {
+  router.push(`/tabs/edit/${id}`)
+}
+
+const transactions = ref<any[]>([])
 
 onMounted(() => {
-  const q = query(collection(db, "expenses"), orderBy("createdAt", "desc"));
-  
+  const q = query(collection(db, 'expenses'), orderBy('createdAt', 'desc'))
+
   onSnapshot(q, (snapshot) => {
     transactions.value = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    }));
-  });
-});
+    }))
+  })
+})
 
-const totalIncome = computed(() => {
-  return transactions.value
+const totalIncome = computed(() =>
+  transactions.value
     .filter(item => item.type === 'income')
-    .reduce((sum, item) => sum + item.amount, 0);
-});
+    .reduce((sum, item) => sum + item.amount, 0)
+)
 
-const totalExpense = computed(() => {
-  return transactions.value
+const totalExpense = computed(() =>
+  transactions.value
     .filter(item => item.type === 'expense')
-    .reduce((sum, item) => sum + item.amount, 0);
-});
+    .reduce((sum, item) => sum + item.amount, 0)
+)
 
-const totalBalance = computed(() => {
-  return totalIncome.value - totalExpense.value;
-});
+const totalBalance = computed(() =>
+  totalIncome.value - totalExpense.value
+)
 
-const formatNumber = (num: number) => {
-  return num.toLocaleString();
-};
+const formatNumber = (num: number) => num.toLocaleString()
 </script>
-
-<style scoped>
-.balance-card {
-  text-align: center;
-  margin-bottom: 10px;
-  background: #f8f9fa;
-}
-
-.balance-amount {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2dd36f;
-}
-
-.summary-card {
-  margin: 0;
-}
-
-.summary-card ion-card-title {
-  font-size: 1.2rem;
-}
-</style>

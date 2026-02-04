@@ -1,8 +1,7 @@
-import './Tab2.css'
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar class="my-header">
         <ion-title>เพิ่มรายการรายรับ–รายจ่าย</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -22,7 +21,7 @@ import './Tab2.css'
           <ion-input 
             label="จำนวนเงิน" 
             label-placement="stacked" 
-            type="number" 
+            type="number"
             inputmode="decimal"
             v-model="amount" 
             placeholder="0.00">
@@ -37,12 +36,18 @@ import './Tab2.css'
         </ion-item>
 
         <ion-item>
-          <ion-input 
-            label="หมวดหมู่" 
-            label-placement="stacked" 
-            v-model="category" 
-            placeholder="เช่น อาหาร, เดินทาง">
-          </ion-input>
+          <ion-select
+            label="หมวดหมู่"
+            label-placement="stacked"
+            v-model="category"
+            interface="alert"
+            @ionChange="handleCategoryChange"
+          >
+            <ion-select-option value="อาหาร">อาหาร</ion-select-option>
+            <ion-select-option value="เดินทาง">เดินทาง</ion-select-option>
+            <ion-select-option value="ช้อปปิ้ง">ช้อปปิ้ง</ion-select-option>
+            <ion-select-option value="อื่น ๆ">อื่น ๆ</ion-select-option>
+          </ion-select>
         </ion-item>
 
         <ion-item>
@@ -56,7 +61,7 @@ import './Tab2.css'
       </ion-list>
 
       <div class="ion-padding">
-        <ion-button expand="block" :disabled="isSubmitting" @click="saveExpense">
+        <ion-button expand="block" class="my-btn" :disabled="isSubmitting" @click="saveExpense">
           <ion-spinner v-if="isSubmitting" name="crescent"></ion-spinner>
           <span v-else>บันทึกข้อมูล</span>
         </ion-button>
@@ -66,6 +71,7 @@ import './Tab2.css'
 </template>
 
 <script setup lang="ts">
+import './Tab2.css'
 import { ref } from "vue";
 import { 
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent, 
@@ -86,12 +92,12 @@ const category = ref("");
 const note = ref("");
 const isSubmitting = ref(false);
 
-// Toast Notification Helper
+// Toast
 const showToast = async (message: string, color: 'success' | 'danger') => {
   const toast = await toastController.create({
-    message: message,
+    message,
     duration: 2000,
-    color: color,
+    color,
     position: 'top'
   });
   await toast.present();
@@ -100,7 +106,6 @@ const showToast = async (message: string, color: 'success' | 'danger') => {
 const saveExpense = async () => {
   const numAmount = Number(amount.value);
 
-  // --- VALIDATION LOGIC ---
   if (!title.value.trim()) {
     await showToast("กรุณากรอกชื่อรายการ", "danger");
     return;
@@ -111,7 +116,6 @@ const saveExpense = async () => {
     return;
   }
 
-  // --- DATABASE LOGIC ---
   isSubmitting.value = true;
   try {
     await addDoc(collection(db, "expenses"), {
@@ -125,14 +129,12 @@ const saveExpense = async () => {
 
     await showToast("บันทึกข้อมูลสำเร็จ!", "success");
 
-    // Clear Form
     title.value = "";
     amount.value = "";
     type.value = "expense";
     category.value = "";
     note.value = "";
 
-    // Redirect
     router.push("/tabs/tab1");
   } catch (err) {
     console.error("Firebase Error:", err);
@@ -142,10 +144,3 @@ const saveExpense = async () => {
   }
 };
 </script>
-
-<style scoped>
-/* Add any custom styling here */
-ion-list {
-  margin-top: 20px;
-}
-</style>

@@ -1,0 +1,37 @@
+ion-card.balance-card {
+  --background: #fffbe2;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.balance-amount {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #000;
+}
+/* รายรับ */
+ion-card.summary-card.income {
+  --background: #e6f4f1;
+  border: 1px solid #b6e0d8;
+  border-radius: 14px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+}
+
+ion-card.summary-card.income ion-card-title {
+  color: #1f5f55;
+}
+
+/* รายจ่าย */
+ion-card.summary-card.expense {
+  --background: #fff1eb;
+  border: 1px solid #f3c2b2;
+  border-radius: 14px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+}
+
+ion-card.summary-card.expense ion-card-title {
+  color: #8a3b2a;
+}
+
