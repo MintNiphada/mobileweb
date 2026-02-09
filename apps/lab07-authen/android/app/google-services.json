@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "702141441945",
+    "project_id": "web2025-mobilewebapp",
+    "storage_bucket": "web2025-mobilewebapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702141441945:android:ba671c7d4ea1992e045508",
+        "android_client_info": {
+          "package_name": "cpkku.niphada.lab07"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUv69scMm1PZbSUWfLMaAdLj0fbjDXXZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

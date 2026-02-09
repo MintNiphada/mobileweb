@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #e9f3ff, #ffedf7);
+  background: linear-gradient(135deg, #e9f3ff, #fff);
   background-attachment: fixed;
   font-family: "Prompt", sans-serif;
 }
@@ -65,15 +65,19 @@ header {
   transition: 0.3s;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(90deg, #b5e5ff, #fbb1f0);
-  border: 2px solid rgba(255, 255, 245, 0.75);
-}
 
 /* back link */
 .back {
-  text-align: center;
-  margin-top: 25px;
+  display: inline-block;
+  background-color: #87bdff;
+  color: white;
+  padding: 12px;
+  border-radius: 28px;
+  border: 2px solid #8bc0fc;
+  text-decoration: none;
+  margin-top: 15px;
+  transition: 0.3s;
+  text-align: right;
 }
 
 .back a {
