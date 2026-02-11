@@ -1,4 +1,15 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AuthUser, IAuthService, EmailPasswordCredentials, PhoneCredentials } from "./auth-interface";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithPhoneNumber,
+  ConfirmationResult,
+} from "firebase/auth";
+import { RecaptchaVerifier } from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBfiWyhVKLthXzS4JKe3n8arDU-VbXiH2g",
   authDomain: "web2025-mobilewebapp.firebaseapp.com",
@@ -9,21 +20,8 @@ const firebaseConfig = {
   measurementId: "G-7Y85XDCRE6"
 };
 
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { AuthUser, IAuthService, EmailPasswordCredentials,PhoneCredentials } from "./auth-interface";
-import {
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithPhoneNumber,
-  ConfirmationResult,
-} from "firebase/auth";
-
-
 export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(firebaseApp);
-
 
 function mapUser(u: any): AuthUser {
   return {
@@ -31,55 +29,38 @@ function mapUser(u: any): AuthUser {
     email: u.email,
     displayName: u.displayName,
     photoUrl: u.photoURL,
+    phoneNumber: u.phoneNumber,
   };
 }
 
-
-import { RecaptchaVerifier } from "firebase/auth";
-import { code } from "ionicons/icons";
-
-
 let verifier: RecaptchaVerifier | null = null;
 let confirmationResult: ConfirmationResult | null = null;
+const recaptchaContainerId = "recaptcha-container";
 
-
-// ควรมี div สำหรับ reCAPTCHA ในหน้า login สำหรับโทรศัพท์ ด้วย id="recaptcha-container"
-const recaptchaContainerId: string = "recaptcha-container";
-
-
-export function getRecaptchaVerifier(
-  containerId: string
-): RecaptchaVerifier {
+export function getRecaptchaVerifier(containerId: string): RecaptchaVerifier {
   if (!verifier) {
-    verifier = new RecaptchaVerifier(
-      firebaseAuth,
-      containerId,
-      {
-        size: "invisible", // หรือ "normal"
-      }
-    );
+    verifier = new RecaptchaVerifier(firebaseAuth, containerId, {
+      size: "invisible",
+    });
   }
   return verifier;
 }
 
-
 export class FirebaseWebAuthService implements IAuthService {
-  async getCurrentUser() {
-    return firebaseAuth.currentUser
-      ? mapUser(firebaseAuth.currentUser)
-      : null;
-  }
 
+  async getCurrentUser(): Promise<AuthUser | null> {
+    return new Promise((resolve) => {
+      const unsub = onAuthStateChanged(firebaseAuth, (user) => {
+        unsub();
+        resolve(user ? mapUser(user) : null);
+      });
+    });
+  }
 
   async loginWithEmailPassword(creds: EmailPasswordCredentials) {
-    const r = await signInWithEmailAndPassword(
-      firebaseAuth,
-      creds.email,
-      creds.password
-    );
+    const r = await signInWithEmailAndPassword(firebaseAuth, creds.email, creds.password);
     return mapUser(r.user);
   }
-
 
   async loginWithGoogle() {
     const provider = new GoogleAuthProvider();
@@ -87,32 +68,19 @@ export class FirebaseWebAuthService implements IAuthService {
     return mapUser(r.user);
   }
 
-
   async logout() {
     await firebaseAuth.signOut();
   }
 
-
-  async startPhoneLogin(
-    creds: PhoneCredentials
-  ): Promise<{ verificationId: string }> {
+  async startPhoneLogin(creds: PhoneCredentials): Promise<{ verificationId: string }> {
     const verifier = getRecaptchaVerifier(recaptchaContainerId);
-    confirmationResult = await signInWithPhoneNumber(
-      firebaseAuth,
-      creds.phoneNumberE164,
-      verifier
-    );
+    confirmationResult = await signInWithPhoneNumber(firebaseAuth, creds.phoneNumberE164, verifier);
     return { verificationId: confirmationResult.verificationId };
   }
 
-
   async confirmPhoneCode(payload: { verificationId: string; verificationCode: string }): Promise<AuthUser> {
-    if (!confirmationResult) {
-      throw new Error("No confirmation result");
-    }
+    if (!confirmationResult) throw new Error("No confirmation result");
     const r = await confirmationResult.confirm(payload.verificationCode);
     return mapUser(r.user);
   }
-
-
 }

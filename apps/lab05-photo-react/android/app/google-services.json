@@ -14,14 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "702141441945-ckp8pdfs4ou4ad75uqpdghv3osmbpghf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "cpkku.niphada.lab07",
-            "certificate_hash": "c4f2fc331017069d2aef801e969d96c80b39e28c"
-          }
-        },
-        {
           "client_id": "702141441945-96kooglveanejo0neecjr83uqq6oac8r.apps.googleusercontent.com",
           "client_type": 3
         }
