@@ -44,14 +44,17 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const user = await authService.getCurrentUser();
+  let user = null;
+  try {
+    user = await authService.getCurrentUser();
+  } catch {
+    user = null;
+  }
 
-  // login แล้ว ห้ามกลับไปหน้า login
   if (to.path === '/login' && user) {
     return '/tabs/tab1';
   }
 
-  // ยังไม่ login ห้ามเข้า tabs
   if (to.meta.requiresAuth && !user) {
     return '/login';
   }
